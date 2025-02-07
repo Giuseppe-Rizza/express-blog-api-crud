@@ -4,35 +4,26 @@ const express = require("express");
 // Creo una variabile router
 const router = express.Router();
 
+// Importo le funzioni
+const postController = require("../controllers/postController")
+
 // index
-router.get("/", function(req, res) {
-    res.send("Lista delle pizze");
-});
+router.get("/", postController.index);
 
 // show
-router.get("/:id", function(req, res) {
-    res.send("Dettagli della pizza " + req.params.id);
-});
+router.get("/:id", postController.show);
 
 // store
-router.post("/", function(req, res) {
-    res.send("Creazione nuovo post");
-});
+router.post("/", postController.store);
 
 // update
-router.put("/:id", function(req, res) {
-    res.send("Modifica integrale del post " + req.params.id);
-});
+router.put("/:id", postController.update);
 
 // modify
-router.patch("/:id", function(req, res) {
-    res.send("Modifica parziale del post " + req.params.id);
-});
+router.patch("/:id", postController.modify);
 
 // destroy
-router.delete("/:id", function(req, res) {
-    res.send("Cancellazione del post " + req.params.id);
-});
+router.delete("/:id", postController.destroy);
 
 // Esporto l'istanza di router
 module.exports = router;
