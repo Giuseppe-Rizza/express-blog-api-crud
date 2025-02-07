@@ -7,7 +7,7 @@ const router = express.Router();
 // index
 router.get("/", function(req, res) {
     res.send("Lista delle pizze");
-    });
+});
 
 // show
 router.get("/:id", function(req, res) {
