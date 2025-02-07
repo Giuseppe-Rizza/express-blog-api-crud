@@ -44,4 +44,5 @@ const posts = [
   },
 ];
 
+// Esporto l'array dei post
 module.exports = posts;
