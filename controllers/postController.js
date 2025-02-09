@@ -1,14 +1,36 @@
 // Importo l'array dei post
+const { json } = require("express");
 const posts = require("./data/array_posts");
 
 // Aggiungo la funzione index
 function index(req, res) {
-    res.send("Lista delle pizze");
+    // res.send("Lista dei post");
+    res.json(posts);
 };
 
 // Aggiungo la funzione show
 function show(req, res) {
-    res.send("Dettagli della pizza " + req.params.id);
+    // res.send("Dettagli del post " + req.params.id);
+
+    // Recupero l'id dall'URL come parametro dinamico e lo salvo in una costante interna alla funzione che andrà a salvare, forzandola a diventare un numero, quello che l'utente ha scritto dall'altra parte come parametro dinamico
+    const id = parseInt(req.params.id);
+
+    // Uso il metodo find per trovare nell'array di oggetti "posts" esattamente quell'elemento dell'array che come proprietà id dell'oggetto corrisponde con l'id che ha passato l'utente e lo ritorno sotto forma di json
+    const post = posts.find(post => post.id === id);
+
+    // Eseguo il controllo se per caso l'utente scrive un id che non corrisponde ad alcun elemento
+    if(!post){
+        // Se l'id passato non trova nessun elemento corrispondente, restituisco un json con informazioni sull'errore, incluso lo status
+        res.status(404);
+
+        return res.json({
+            error: "Not Found",
+            message: "Post non trovato"
+        });
+    };
+
+    // Restituisco l'elemento sotto forma di JSON
+    res.json(post);
 };
 
 // Aggiungo la funzione store
@@ -28,7 +50,33 @@ function modify(req, res) {
 
 // Aggiungo la funzione destroy
 function destroy(req, res) {
-    res.send("Cancellazione del post " + req.params.id);
+    // res.send("Cancellazione del post " + req.params.id);
+
+    // Recupero l'id dall'URL come parametro dinamico e lo salvo in una costante interna alla funzione che andrà a salvare, forzandola a diventare un numero, quello che l'utente ha scritto dall'altra parte come parametro dinamico
+    const id = parseInt(req.params.id);
+
+    // Uso il metodo find per trovare nell'array di oggetti "posts" esattamente quell'elemento dell'array che come proprietà id dell'oggetto corrisponde con l'id che ha passato l'utente e lo ritorno sotto forma di json
+    const post = posts.find(post => post.id === id);
+
+    // Eseguo il controllo se per caso l'utente scrive un id che non corrisponde ad alcun elemento
+    if(!post){
+        // Se l'id passato non trova nessun elemento corrispondente, restituisco un json con informazioni sull'errore, incluso lo status
+        res.status(404);
+
+        return res.json({
+            error: "Not Found",
+            message: "Post non trovato"
+        });
+    };
+
+    // Rimuovo il singolo elemento dall'array
+    posts.splice(posts.indexOf(post), 1);
+
+    // Per controllare che l'elemento corretto sia stato correttamente cancellato dall'array, stampo nel terminale la lista aggiornata, prima di restituire lo status
+    console.log(posts);
+
+    // Restituisco una risposta con uno status 204, ma senza body (ossia senza contenuto)
+    res.sendStatus(204);
 };
 
 // Esporto tutte le funzioni
