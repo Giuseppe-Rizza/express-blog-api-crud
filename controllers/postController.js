@@ -35,8 +35,31 @@ function show(req, res) {
 
 // Aggiungo la funzione store
 function store(req, res) {
-    console.log(req.body);
-    res.send("Creazione nuovo post");
+    // Creo un nuovo id incrementando l'ultimo id presente
+    const newId = posts[posts.length - 1].id + 1;
+
+    // Creo un nuovo oggetto post con i dati ricevuti
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    };
+
+    // Aggiungo il nuovo post all'array posts
+    posts.push(newPost);
+
+    // Controllo l'effettivo aggiornamento dell'array
+    console.log(posts);
+
+    // Restituisco lo status corretto e l'elemento post appena creato in formato json
+    res.status(201);
+    res.json(newPost);
+
+    // console.log(req.body);
+
+    // res.send("Creazione nuovo post");
 };
 
 // Aggiungo la funzione update
