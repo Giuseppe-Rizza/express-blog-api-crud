@@ -1,6 +1,6 @@
 // Importo l'array dei post
 const { json } = require("express");
-const posts = require("./data/array_posts");
+const posts = require("../data/array_posts");
 
 // Aggiungo la funzione index
 function index(req, res) {
