@@ -16,6 +16,9 @@ const postsRouter = require("./routers/posts");
 // Definisco l'uso di una cartella per i file statici
 app.use(express.static("public"));
 
+// Registro il body-parser per "application/json"
+app.use(express.json());
+
 // Definisco la prima rotta
 app.get("/", (req, res) => {
     // Se l'utente finisce sull'endpoint / gli ritorna un testo con scritto "Server del mio blog"

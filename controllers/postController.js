@@ -35,6 +35,7 @@ function show(req, res) {
 
 // Aggiungo la funzione store
 function store(req, res) {
+    console.log(req.body);
     res.send("Creazione nuovo post");
 };
 
