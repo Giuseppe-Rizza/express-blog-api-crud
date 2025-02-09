@@ -1,7 +1,6 @@
 # express-blog-api-crud
 Express Blog - API CRUD (parte 1)
 
-
 MILESTONE 1
 Come prima cosa, creiamo un controller per i nostri post, in una cartella controllers.
 All’interno, prepariamo tutte le funzioni necessarie e copiamo in ciascuna la logica delle funzioni che attualmente si trovano nel router (al momento restituiscono solo dei messaggi).
@@ -24,3 +23,38 @@ Implementare un filtro di ricerca nella index che mostri solo i post che hanno u
 
 BONUS 2
 In Show e Destroy, controllare se il parametro si riferisce ad un post esistente, in caso contrario, rispondere con uno stato 404 e un messaggio d’errore, sempre in formato JSON
+
+
+
+
+Express Blog - API CRUD (parte 2)
+
+MILESTONE 1
+Per iniziare, andiamo su Postman e prepariamo una nuova chiamata verso la nostra rotta store.
+Impostiamo il verbo e l’endpoint corretti
+Selezioniamo il tab body e scegliamo il formato raw e JSON
+Inseriamo come corpo della nostra request un oggetto che rappresenti un nuovo post
+Nota: se vogliamo avere delle immagini, inventiamole pure.
+Nota: ricordiamo che non bisogna passare l’id quando si crea una nuova risorsa: sarà il server (con l’aiuto del database) a fornirlo.
+
+
+MILESTONE 2
+Impostiamo il body-parser per far sì che la nostra app riesca a decifrare il request body.
+Poi, all’interno della rotta Store, stampiamo nel terminale i dati in arrivo, grazie a un console.log
+
+
+MILESTONE 3
+Implementiamo quindi la logica per aggiungere un nuovo post al nostro blog, e prepariamo la risposta adeguata.
+Testiamolo con postman.
+
+
+MILESTONE 4
+Ripetiamo il procedimento per la rotta di Update, in modo da avere la possibilità di modificare le nostre risorse.
+
+
+BONUS 1
+Quelli del giorno prima, se non già fatti
+
+
+BONUS 2
+In Update, controllare se il parametro si riferisce ad un post esistente, in caso contrario, rispondere con uno stato 404 e un messaggio d’errore, sempre in formato JSON.
