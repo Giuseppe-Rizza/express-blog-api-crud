@@ -13,6 +13,13 @@ const posts = require("./data/array_posts");
 // Importo l'istanza di router
 const postsRouter = require("./routers/posts");
 
+// Importo il middleware di gestione errore server
+const errorsHandler = require("./middlewares/errorsHandler");
+
+// Importo il middleware di gestione errore 404
+const notFound = require("./middlewares/notFound");
+
+
 // Definisco l'uso di una cartella per i file statici
 app.use(express.static("public"));
 
@@ -33,6 +40,12 @@ app.get("/bacheca", (req, res) => {
 
 // Indico l'esistenza di nuove rotte specificando il prefisso e il router
 app.use("/posts", postsRouter);
+
+// Utilizzo il middleware di gestione errore server
+app.use(errorsHandler);
+
+// utilizzo il middleware di gestione errore 404
+app.use(notFound);
 
 // Avvio il server, mettendolo in ascolto sulla porta indicata
 app.listen(port, () => {
