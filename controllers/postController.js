@@ -35,6 +35,8 @@ function show(req, res) {
 
 // Aggiungo la funzione store
 function store(req, res) {
+    // res.send("Creazione nuovo post");
+
     // Creo un nuovo id incrementando l'ultimo id presente
     const newId = posts[posts.length - 1].id + 1;
 
@@ -58,13 +60,40 @@ function store(req, res) {
     res.json(newPost);
 
     // console.log(req.body);
-
-    // res.send("Creazione nuovo post");
 };
 
 // Aggiungo la funzione update
 function update(req, res) {
-    res.send("Modifica integrale del post " + req.params.id);
+    // res.send("Modifica integrale del post " + req.params.id);
+
+    // Recupero l'id dall'URL come parametro dinamico e lo salvo in una costante interna alla funzione che andrà a salvare, forzandola a diventare un numero, quello che l'utente ha scritto dall'altra parte come parametro dinamico
+    const id = parseInt(req.params.id);
+
+    // Uso il metodo find per trovare nell'array di oggetti "posts" esattamente quell'elemento dell'array che come proprietà id dell'oggetto corrisponde con l'id che ha passato l'utente e lo ritorno sotto forma di json
+    const post = posts.find(post => post.id === id);
+
+    // Eseguo il controllo se per caso l'utente scrive un id che non corrisponde ad alcun elemento
+    if(!post){
+        // Se l'id passato non trova nessun elemento corrispondente, restituisco un json con informazioni sull'errore, incluso lo status
+        res.status(404);
+
+        return res.json({
+            error: "Not Found",
+            message: "Post non trovato"
+        });
+    };
+
+    // Aggiorno l'elemento dell'array
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    // Controllo che l'array sia correttamente aggiornato
+    console.log(posts);
+
+    // Restituisco l'elemento appena aggiornato sotto forma di JSON
+    res.json(post);
 };
 
 // Aggiungo la funzione modify
