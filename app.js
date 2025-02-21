@@ -7,6 +7,9 @@ const app = express();
 // Do una porta
 const port = 3000;
 
+// Importo CORS
+const cors = require("cors");
+
 // Importo l'array dei post
 const posts = require("./data/array_posts");
 
@@ -40,6 +43,9 @@ app.get("/bacheca", (req, res) => {
 
 // Indico l'esistenza di nuove rotte specificando il prefisso e il router
 app.use("/posts", postsRouter);
+
+// Utilizzo il middleware CORS
+app.use(cors());
 
 // Utilizzo il middleware di gestione errore server
 app.use(errorsHandler);
